@@ -1,8 +1,6 @@
 module "storage_account" {
-  # source  = "claranet/storage-account/azurerm"
-  # version = "~> 7.5.0"
-
-  source = "git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/storage-account.git?ref=AZ-924_add_sftp_support"
+  source  = "claranet/storage-account/azurerm"
+  version = "~> 7.5.0"
 
   location       = var.location
   location_short = var.location_short

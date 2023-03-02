@@ -160,7 +160,7 @@ module "storage_sftp" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| storage\_account | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/storage-account.git | AZ-924_add_sftp_support |
+| storage\_account | claranet/storage-account/azurerm | ~> 7.5.0 |
 
 ## Resources
 
