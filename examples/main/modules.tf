@@ -70,8 +70,9 @@ module "storage_sftp" {
 
   sftp_users = [
     {
-      name           = "foo"
-      home_directory = "foo/example" # `example` is a subdirectory under `foo` container
+      name                 = "foo"
+      home_directory       = "foo/example" # `example` is a subdirectory under `foo` container
+      ssh_password_enabled = true
       permissions_scopes = [
         {
           target_container = "foo"
