@@ -26,11 +26,11 @@ resource "azurerm_storage_account_local_user" "sftp_users" {
       service       = "blob"
       resource_name = permission_scope.value.target_container
       permissions {
-        create = contains(permission_scope.value.permissions, "All") ? true : contains(permission_scope.value.permissions, "Create")
-        delete = contains(permission_scope.value.permissions, "All") ? true : contains(permission_scope.value.permissions, "Delete")
-        list   = contains(permission_scope.value.permissions, "All") ? true : contains(permission_scope.value.permissions, "List")
-        read   = contains(permission_scope.value.permissions, "All") ? true : contains(permission_scope.value.permissions, "Read")
-        write  = contains(permission_scope.value.permissions, "All") ? true : contains(permission_scope.value.permissions, "Write")
+        create = contains(permission_scope.value.permissions, "All") || contains(permission_scope.value.permissions, "Create")
+        delete = contains(permission_scope.value.permissions, "All") || contains(permission_scope.value.permissions, "Delete")
+        list   = contains(permission_scope.value.permissions, "All") || contains(permission_scope.value.permissions, "List")
+        read   = contains(permission_scope.value.permissions, "All") || contains(permission_scope.value.permissions, "Read")
+        write  = contains(permission_scope.value.permissions, "All") || contains(permission_scope.value.permissions, "Write")
       }
     }
   }
