@@ -183,8 +183,10 @@ variable "identity_ids" {
 variable "sftp_users" {
   description = "List of local SFTP user objects."
   type = list(object({
-    name           = string
-    home_directory = optional(string)
+    name                 = string
+    home_directory       = optional(string)
+    ssh_key_enabled      = optional(bool, true)
+    ssh_password_enabled = optional(bool)
     permissions_scopes = list(object({
       target_container = string
       permissions      = optional(list(string), ["All"])
