@@ -1,4 +1,4 @@
-# Unreleased
+# v7.1.0 - 2023-04-07
 
 Breaking
   * AZ-1050: Use the `azurerm_storage_account_local_user` resource instead of the AzAPI resource
