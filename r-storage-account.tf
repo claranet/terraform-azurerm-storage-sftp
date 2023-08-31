@@ -1,6 +1,7 @@
 module "storage_account" {
-  source  = "claranet/storage-account/azurerm"
-  version = "~> 7.5.0"
+  # source  = "claranet/storage-account/azurerm"
+  # version = "7.6.0"
+  source = "git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/storage-account.git?ref=AZ-1153-update-logs"
 
   location       = var.location
   location_short = var.location_short
@@ -51,7 +52,6 @@ module "storage_account" {
   logs_destinations_ids   = var.logs_destinations_ids
   logs_categories         = var.logs_categories
   logs_metrics_categories = var.logs_metrics_categories
-  logs_retention_days     = var.logs_retention_days
 
   default_tags_enabled = var.default_tags_enabled
 

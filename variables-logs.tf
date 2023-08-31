@@ -21,12 +21,6 @@ variable "logs_metrics_categories" {
   default     = null
 }
 
-variable "logs_retention_days" {
-  type        = number
-  description = "Number of days to keep logs on the Storage Account."
-  default     = 30
-}
-
 # Custom naming override
 
 variable "custom_diagnostic_settings_name" {
