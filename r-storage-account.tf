@@ -1,7 +1,6 @@
 module "storage_account" {
-  # source  = "claranet/storage-account/azurerm"
-  # version = "7.6.0"
-  source = "git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/storage-account.git?ref=AZ-1153-update-logs"
+  source  = "claranet/storage-account/azurerm"
+  version = "7.8.0"
 
   location       = var.location
   location_short = var.location_short

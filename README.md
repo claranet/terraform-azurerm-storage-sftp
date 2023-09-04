@@ -161,7 +161,7 @@ module "storage_sftp" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| storage\_account | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/storage-account.git | AZ-1153-update-logs |
+| storage\_account | claranet/storage-account/azurerm | 7.8.0 |
 
 ## Resources
 
