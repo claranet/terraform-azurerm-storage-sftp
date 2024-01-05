@@ -44,6 +44,7 @@ module "storage_account" {
   subnet_ids              = var.subnet_ids
   allowed_cidrs           = var.allowed_cidrs
   network_bypass          = var.network_bypass
+  private_link_access     = var.private_link_access
 
   identity_type = var.identity_type
   identity_ids  = var.identity_ids
