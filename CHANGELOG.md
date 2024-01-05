@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-1323: Add `private_link_access` parameter
+
 # v7.2.0 - 2023-09-08
 
 Breaking

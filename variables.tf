@@ -164,6 +164,16 @@ variable "default_firewall_action" {
   default     = "Deny"
 }
 
+variable "private_link_access" {
+  description = "List of Privatelink objects to allow access from."
+  type = list(object({
+    endpoint_resource_id = string
+    endpoint_tenant_id   = optional(string, null)
+  }))
+  default  = []
+  nullable = false
+}
+
 # Identity
 
 variable "identity_type" {
