@@ -1,4 +1,4 @@
-# Unreleased
+# v7.3.0 - 2024-01-05
 
 Added
   * AZ-1323: Add `private_link_access` parameter
