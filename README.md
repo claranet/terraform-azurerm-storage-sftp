@@ -161,7 +161,7 @@ module "storage_sftp" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| storage\_account | claranet/storage-account/azurerm | ~> 7.11.0 |
+| storage\_account | claranet/storage-account/azurerm | ~> 7.12.0 |
 
 ## Resources
 
@@ -212,7 +212,7 @@ module "storage_sftp" {
 | shared\_access\_key\_enabled | Indicates whether the Storage Account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). | `bool` | `true` | no |
 | stack | Project stack name. | `string` | n/a | yes |
 | static\_website\_config | Static website configuration. | <pre>object({<br>    index_document     = optional(string)<br>    error_404_document = optional(string)<br>  })</pre> | `null` | no |
-| storage\_blob\_cors\_rule | Blob Storage CORS rule. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information. | <pre>object({<br>    allowed_headers    = list(string)<br>    allowed_methods    = list(string)<br>    allowed_origins    = list(string)<br>    exposed_headers    = list(string)<br>    max_age_in_seconds = number<br>  })</pre> | `null` | no |
+| storage\_blob\_cors\_rules | Storage Account blob CORS rules. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information. | <pre>list(object({<br>    allowed_headers    = list(string)<br>    allowed_methods    = list(string)<br>    allowed_origins    = list(string)<br>    exposed_headers    = list(string)<br>    max_age_in_seconds = number<br>  }))</pre> | `[]` | no |
 | storage\_blob\_data\_protection | Blob Storage data protection parameters. | <pre>object({<br>    delete_retention_policy_in_days           = optional(number, 0)<br>    container_delete_retention_policy_in_days = optional(number, 0)<br>  })</pre> | <pre>{<br>  "container_delete_retention_policy_in_days": 30,<br>  "delete_retention_policy_in_days": 30<br>}</pre> | no |
 | subnet\_ids | Subnets to allow access to that Storage Account. | `list(string)` | `[]` | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `storage_account_custom_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
