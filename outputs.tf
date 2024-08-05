@@ -19,11 +19,6 @@ output "storage_account_identity" {
   value       = module.storage_account.storage_account_identity
 }
 
-output "storage_account_network_rules" {
-  description = "Network rules of the associated Storage Account."
-  value       = module.storage_account.storage_account_network_rules
-}
-
 output "storage_blob_containers" {
   description = "Created Blob containers in the Storage Account."
   value       = module.storage_account.storage_blob_containers

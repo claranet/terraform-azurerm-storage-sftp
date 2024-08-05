@@ -224,7 +224,6 @@ module "storage_sftp" {
 | storage\_account\_id | Created Storage Account ID. |
 | storage\_account\_identity | Created Storage Account identity block. |
 | storage\_account\_name | Created Storage Account name. |
-| storage\_account\_network\_rules | Network rules of the associated Storage Account. |
 | storage\_account\_properties | Created Storage Account properties. |
 | storage\_blob\_containers | Created Blob containers in the Storage Account. |
 | storage\_sftp\_users | Information about created local SFTP users. |
