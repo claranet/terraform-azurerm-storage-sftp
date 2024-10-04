@@ -161,7 +161,7 @@ module "storage_sftp" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| storage\_account | claranet/storage-account/azurerm | ~> 7.13.3 |
+| storage\_account | claranet/storage-account/azurerm | ~> 7.14.0 |
 
 ## Resources
 
