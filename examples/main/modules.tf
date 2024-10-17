@@ -1,37 +1,3 @@
-module "azure_region" {
-  source  = "claranet/regions/azurerm"
-  version = "x.x.x"
-
-  azure_region = var.azure_region
-}
-
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "x.x.x"
-
-  location    = module.azure_region.location
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-}
-
-module "logs" {
-  source  = "claranet/run/azurerm//modules/logs"
-  version = "x.x.x"
-
-  location       = module.azure_region.location
-  location_short = module.azure_region.location_short
-  client_name    = var.client_name
-  environment    = var.environment
-  stack          = var.stack
-
-  resource_group_name = module.rg.resource_group_name
-}
-
-data "http" "my_ip" {
-  url = "https://ip.clara.net"
-}
-
 # When using RSA algorithm, do not forget to add `-o PubkeyAcceptedKeyTypes=+ssh-rsa` in your SFTP connection command line
 # e.g. `sftp -o PubkeyAcceptedKeyTypes=+ssh-rsa -i <privateKeyPath> <storageAccountName>.<sftpLocalUserName>@<storageAccountName>.blob.core.windows.net`
 resource "tls_private_key" "bar_example" {
@@ -49,7 +15,7 @@ module "storage_sftp" {
   environment    = var.environment
   stack          = var.stack
 
-  resource_group_name = module.rg.resource_group_name
+  resource_group_name = module.rg.name
 
   name_suffix = "sftp"
 
@@ -102,8 +68,8 @@ module "storage_sftp" {
   ]
 
   logs_destinations_ids = [
-    module.logs.logs_storage_account_id,
-    module.logs.log_analytics_workspace_id,
+    # module.logs.logs_storage_account_id,
+    # module.logs.log_analytics_workspace_id,
   ]
 
   extra_tags = {

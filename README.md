@@ -39,40 +39,6 @@ More details about variables set by the `terraform-wrapper` available in the [do
 [Hashicorp Terraform](https://github.com/hashicorp/terraform/). Instead, we recommend to use [OpenTofu](https://github.com/opentofu/opentofu/).
 
 ```hcl
-module "azure_region" {
-  source  = "claranet/regions/azurerm"
-  version = "x.x.x"
-
-  azure_region = var.azure_region
-}
-
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "x.x.x"
-
-  location    = module.azure_region.location
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-}
-
-module "logs" {
-  source  = "claranet/run/azurerm//modules/logs"
-  version = "x.x.x"
-
-  location       = module.azure_region.location
-  location_short = module.azure_region.location_short
-  client_name    = var.client_name
-  environment    = var.environment
-  stack          = var.stack
-
-  resource_group_name = module.rg.resource_group_name
-}
-
-data "http" "my_ip" {
-  url = "https://ip.clara.net"
-}
-
 # When using RSA algorithm, do not forget to add `-o PubkeyAcceptedKeyTypes=+ssh-rsa` in your SFTP connection command line
 # e.g. `sftp -o PubkeyAcceptedKeyTypes=+ssh-rsa -i <privateKeyPath> <storageAccountName>.<sftpLocalUserName>@<storageAccountName>.blob.core.windows.net`
 resource "tls_private_key" "bar_example" {
@@ -90,7 +56,7 @@ module "storage_sftp" {
   environment    = var.environment
   stack          = var.stack
 
-  resource_group_name = module.rg.resource_group_name
+  resource_group_name = module.rg.name
 
   name_suffix = "sftp"
 
@@ -143,8 +109,8 @@ module "storage_sftp" {
   ]
 
   logs_destinations_ids = [
-    module.logs.logs_storage_account_id,
-    module.logs.log_analytics_workspace_id,
+    # module.logs.logs_storage_account_id,
+    # module.logs.log_analytics_workspace_id,
   ]
 
   extra_tags = {
@@ -157,7 +123,7 @@ module "storage_sftp" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 3.114 |
+| azurerm | ~> 4.0 |
 | local | ~> 2.3 |
 | tls | ~> 4.0 |
 
@@ -165,16 +131,16 @@ module "storage_sftp" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| storage\_account | claranet/storage-account/azurerm | ~> 7.14.0 |
+| storage\_account | claranet/storage-account/azurerm | ~> 8.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [azurerm_storage_account_local_user.sftp_users](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_local_user) | resource |
+| [azurerm_storage_account_local_user.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_local_user) | resource |
 | [local_sensitive_file.sftp_users_private_keys](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/sensitive_file) | resource |
 | [local_sensitive_file.sftp_users_public_keys](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/sensitive_file) | resource |
-| [tls_private_key.sftp_users_keys](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
+| [tls_private_key.main](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 
 ## Inputs
 
@@ -187,10 +153,10 @@ module "storage_sftp" {
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | containers | List of objects to create some Blob containers in this Storage Account. | <pre>list(object({<br/>    name                  = string<br/>    container_access_type = optional(string)<br/>    metadata              = optional(map(string))<br/>  }))</pre> | n/a | yes |
 | create\_sftp\_users\_keys | Whether or not key pairs should be created on the filesystem. | `bool` | `true` | no |
-| custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be `default` if not set. | `string` | `"default"` | no |
-| custom\_storage\_account\_name | Custom Azure Storage Account name, generated if not set. | `string` | `""` | no |
+| custom\_name | Custom Azure Storage Account name, generated if not set. | `string` | `""` | no |
 | default\_firewall\_action | Which default firewalling policy to apply. Valid values are `Allow` or `Deny`. | `string` | `"Deny"` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
+| diagnostic\_settings\_custom\_name | Custom name of the diagnostics settings, name will be `default` if not set. | `string` | `"default"` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Additional tags to associate with the Storage Account. | `map(string)` | `{}` | no |
 | https\_traffic\_only\_enabled | Boolean flag which forces HTTPS if enabled. | `bool` | `true` | no |
@@ -200,7 +166,7 @@ module "storage_sftp" {
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
-| logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br/>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br/>If you want to specify an Azure Event Hub to send logs and metrics to, you need to provide a formated string with both the Event Hub Namespace authorization send ID and the Event Hub name (name of the queue to use in the Namespace) separated by the `|` character. | `list(string)` | n/a | yes |
+| logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br/>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br/>If you want to use Azure EventHub as a destination, you must provide a formatted string containing both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the <code>&#124;</code> character. | `list(string)` | n/a | yes |
 | logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
 | min\_tls\_version | The minimum supported TLS version for the Storage Account. Possible values are `TLS1_0`, `TLS1_1`, and `TLS1_2`. | `string` | `"TLS1_2"` | no |
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
@@ -210,25 +176,25 @@ module "storage_sftp" {
 | nfsv3\_enabled | Is NFSv3 protocol enabled? Changing this forces a new resource to be created. | `bool` | `false` | no |
 | private\_link\_access | List of Privatelink objects to allow access from. | <pre>list(object({<br/>    endpoint_resource_id = string<br/>    endpoint_tenant_id   = optional(string, null)<br/>  }))</pre> | `[]` | no |
 | public\_nested\_items\_allowed | Allow or disallow nested items within this Storage Account to opt into being public. | `bool` | `false` | no |
-| resource\_group\_name | Resource Group name. | `string` | n/a | yes |
+| resource\_group\_name | Resource group name. | `string` | n/a | yes |
 | sftp\_users | List of local SFTP user objects. | <pre>list(object({<br/>    name                 = string<br/>    home_directory       = optional(string)<br/>    ssh_key_enabled      = optional(bool, true)<br/>    ssh_password_enabled = optional(bool)<br/>    permissions_scopes = list(object({<br/>      target_container = string<br/>      permissions      = optional(list(string), ["All"])<br/>    }))<br/>    ssh_authorized_keys = optional(list(object({<br/>      key         = string<br/>      description = optional(string)<br/>    })), [])<br/>  }))</pre> | n/a | yes |
 | sftp\_users\_keys\_path | The filesystem location in which the key pairs will be created. Default to `~/.ssh/keys`. | `string` | `"~/.ssh/keys"` | no |
-| shared\_access\_key\_enabled | Indicates whether the Storage Account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). | `bool` | `true` | no |
+| shared\_access\_key\_enabled | Indicates whether the Storage Account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). | `bool` | `false` | no |
 | stack | Project stack name. | `string` | n/a | yes |
 | static\_website\_config | Static website configuration. | <pre>object({<br/>    index_document     = optional(string)<br/>    error_404_document = optional(string)<br/>  })</pre> | `null` | no |
 | storage\_blob\_cors\_rules | Storage Account blob CORS rules. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information. | <pre>list(object({<br/>    allowed_headers    = list(string)<br/>    allowed_methods    = list(string)<br/>    allowed_origins    = list(string)<br/>    exposed_headers    = list(string)<br/>    max_age_in_seconds = number<br/>  }))</pre> | `[]` | no |
 | storage\_blob\_data\_protection | Blob Storage data protection parameters. | <pre>object({<br/>    delete_retention_policy_in_days           = optional(number, 0)<br/>    container_delete_retention_policy_in_days = optional(number, 0)<br/>  })</pre> | <pre>{<br/>  "container_delete_retention_policy_in_days": 30,<br/>  "delete_retention_policy_in_days": 30<br/>}</pre> | no |
 | subnet\_ids | Subnets to allow access to that Storage Account. | `list(string)` | `[]` | no |
-| use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `storage_account_custom_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| storage\_account\_id | Created Storage Account ID. |
-| storage\_account\_identity | Created Storage Account identity block. |
-| storage\_account\_name | Created Storage Account name. |
-| storage\_account\_properties | Created Storage Account properties. |
-| storage\_blob\_containers | Created Blob containers in the Storage Account. |
-| storage\_sftp\_users | Information about created local SFTP users. |
+| blob\_containers | Created Blob containers in the Storage Account. |
+| id | Storage Account ID. |
+| identity\_principal\_id | Storage Account system identity principal ID. |
+| module\_diagnostics | Diagnostics settings module outputs. |
+| name | Storage Account name. |
+| resource | Storage Account resource object. |
+| sftp\_users | Information about created local SFTP users. |
 <!-- END_TF_DOCS -->
