@@ -150,6 +150,8 @@ module "storage_sftp" {
 | account\_replication\_type | Defines the type of replication to use for this Storage Account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. | `string` | `"ZRS"` | no |
 | advanced\_threat\_protection\_enabled | Boolean flag which controls if advanced threat protection is enabled, see [documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-advanced-threat-protection?tabs=azure-portal) for more information. | `bool` | `false` | no |
 | allowed\_cidrs | List of CIDR to allow access to that Storage Account. | `list(string)` | `[]` | no |
+| blob\_cors\_rules | Storage Account blob CORS rules. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information. | <pre>list(object({<br/>    allowed_headers    = list(string)<br/>    allowed_methods    = list(string)<br/>    allowed_origins    = list(string)<br/>    exposed_headers    = list(string)<br/>    max_age_in_seconds = number<br/>  }))</pre> | `[]` | no |
+| blob\_data\_protection | Blob Storage data protection parameters. | <pre>object({<br/>    delete_retention_policy_in_days           = optional(number, 0)<br/>    container_delete_retention_policy_in_days = optional(number, 0)<br/>  })</pre> | <pre>{<br/>  "container_delete_retention_policy_in_days": 30,<br/>  "delete_retention_policy_in_days": 30<br/>}</pre> | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | containers | List of objects to create some Blob containers in this Storage Account. | <pre>list(object({<br/>    name                  = string<br/>    container_access_type = optional(string)<br/>    metadata              = optional(map(string))<br/>  }))</pre> | n/a | yes |
 | create\_sftp\_users\_keys | Whether or not key pairs should be created on the filesystem. | `bool` | `true` | no |
@@ -182,8 +184,6 @@ module "storage_sftp" {
 | shared\_access\_key\_enabled | Indicates whether the Storage Account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). | `bool` | `false` | no |
 | stack | Project stack name. | `string` | n/a | yes |
 | static\_website\_config | Static website configuration. | <pre>object({<br/>    index_document     = optional(string)<br/>    error_404_document = optional(string)<br/>  })</pre> | `null` | no |
-| storage\_blob\_cors\_rules | Storage Account blob CORS rules. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information. | <pre>list(object({<br/>    allowed_headers    = list(string)<br/>    allowed_methods    = list(string)<br/>    allowed_origins    = list(string)<br/>    exposed_headers    = list(string)<br/>    max_age_in_seconds = number<br/>  }))</pre> | `[]` | no |
-| storage\_blob\_data\_protection | Blob Storage data protection parameters. | <pre>object({<br/>    delete_retention_policy_in_days           = optional(number, 0)<br/>    container_delete_retention_policy_in_days = optional(number, 0)<br/>  })</pre> | <pre>{<br/>  "container_delete_retention_policy_in_days": 30,<br/>  "delete_retention_policy_in_days": 30<br/>}</pre> | no |
 | subnet\_ids | Subnets to allow access to that Storage Account. | `list(string)` | `[]` | no |
 
 ## Outputs

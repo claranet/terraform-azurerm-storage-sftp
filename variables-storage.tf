@@ -76,7 +76,7 @@ variable "containers" {
   }))
 }
 
-variable "storage_blob_data_protection" {
+variable "blob_data_protection" {
   description = "Blob Storage data protection parameters."
   type = object({
     delete_retention_policy_in_days           = optional(number, 0)
@@ -88,7 +88,7 @@ variable "storage_blob_data_protection" {
   }
 }
 
-variable "storage_blob_cors_rules" {
+variable "blob_cors_rules" {
   description = "Storage Account blob CORS rules. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information."
   type = list(object({
     allowed_headers    = list(string)

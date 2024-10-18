@@ -21,7 +21,7 @@ resource "azurerm_storage_account_local_user" "main" {
 
   name = each.key
 
-  storage_account_id = module.storage_account.storage_account_id
+  storage_account_id = module.storage_account.id
 
   ssh_key_enabled      = each.value.ssh_key_enabled
   ssh_password_enabled = each.value.ssh_password_enabled
@@ -90,7 +90,7 @@ resource "local_sensitive_file" "sftp_users_private_keys" {
   for_each = var.create_sftp_users_keys ? tls_private_key.main : {}
 
   content         = each.value.private_key_pem
-  filename        = pathexpand(format("%s/%s_%s.pem", var.sftp_users_keys_path, module.storage_account.storage_account_name, each.key))
+  filename        = pathexpand(format("%s/%s_%s.pem", var.sftp_users_keys_path, module.storage_account.name, each.key))
   file_permission = "0600"
 }
 
@@ -98,6 +98,6 @@ resource "local_sensitive_file" "sftp_users_public_keys" {
   for_each = var.create_sftp_users_keys ? tls_private_key.main : {}
 
   content         = each.value.public_key_openssh
-  filename        = pathexpand(format("%s/%s_%s.pub", var.sftp_users_keys_path, module.storage_account.storage_account_name, each.key))
+  filename        = pathexpand(format("%s/%s_%s.pub", var.sftp_users_keys_path, module.storage_account.name, each.key))
   file_permission = "0644"
 }

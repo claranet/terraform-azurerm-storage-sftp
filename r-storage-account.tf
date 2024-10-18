@@ -32,8 +32,8 @@ module "storage_account" {
 
   containers = var.containers
 
-  storage_blob_data_protection = var.storage_blob_data_protection
-  storage_blob_cors_rules      = var.storage_blob_cors_rules
+  blob_data_protection = var.blob_data_protection
+  blob_cors_rules      = var.blob_cors_rules
 
   advanced_threat_protection_enabled = var.advanced_threat_protection_enabled
 
