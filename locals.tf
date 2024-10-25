@@ -17,20 +17,20 @@ locals {
   ]
 
   sftp_users_output = {
-    for key, value in azurerm_storage_account_local_user.sftp_users : key => {
+    for key, value in azurerm_storage_account_local_user.main : key => {
       id       = value.id
       name     = value.name
       password = value.password
 
-      auto_generated_private_key = try(tls_private_key.sftp_users_keys[key].private_key_pem, "")
-      auto_generated_public_key  = try(tls_private_key.sftp_users_keys[key].public_key_openssh, "")
+      auto_generated_private_key = try(tls_private_key.main[key].private_key_pem, "")
+      auto_generated_public_key  = try(tls_private_key.main[key].public_key_openssh, "")
 
       # Will land on the home directory
       sftp_default_connection_cmd = format(
         "sftp -o PubkeyAcceptedKeyTypes=+ssh-rsa -i %s %s.%s@%s",
         try(local_sensitive_file.sftp_users_private_keys[key].filename, "<privateKeyPath>"),
-        module.storage_account.storage_account_name, key,
-        module.storage_account.storage_account_properties.primary_blob_host,
+        module.storage_account.name, key,
+        module.storage_account.resource.primary_blob_host,
       )
 
       # Direct access to each container
@@ -38,8 +38,8 @@ locals {
         for scope in value.permission_scope : scope.resource_name => format(
           "sftp -o PubkeyAcceptedKeyTypes=+ssh-rsa -i %s %s.%s.%s@%s",
           try(local_sensitive_file.sftp_users_private_keys[key].filename, "<privateKeyPath>"),
-          module.storage_account.storage_account_name, scope.resource_name, key,
-          module.storage_account.storage_account_properties.primary_blob_host,
+          module.storage_account.name, scope.resource_name, key,
+          module.storage_account.resource.primary_blob_host,
         )
       }
     }

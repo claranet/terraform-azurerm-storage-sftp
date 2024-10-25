@@ -1,30 +1,34 @@
-output "storage_account_properties" {
-  description = "Created Storage Account properties."
-  value       = module.storage_account.storage_account_properties
-  sensitive   = true
+output "resource" {
+  description = "Storage Account resource object."
+  value       = module.storage_account
 }
 
-output "storage_account_id" {
-  description = "Created Storage Account ID."
-  value       = module.storage_account.storage_account_id
+output "id" {
+  description = "Storage Account ID."
+  value       = module.storage_account.id
 }
 
-output "storage_account_name" {
-  description = "Created Storage Account name."
-  value       = module.storage_account.storage_account_name
+output "name" {
+  description = "Storage Account name."
+  value       = module.storage_account.name
 }
 
-output "storage_account_identity" {
-  description = "Created Storage Account identity block."
-  value       = module.storage_account.storage_account_identity
+output "identity_principal_id" {
+  description = "Storage Account system identity principal ID."
+  value       = module.storage_account.identity_principal_id
 }
 
-output "storage_blob_containers" {
+output "module_diagnostics" {
+  description = "Diagnostics settings module outputs."
+  value       = module.storage_account.module_diagnostics
+}
+
+output "blob_containers" {
   description = "Created Blob containers in the Storage Account."
-  value       = module.storage_account.storage_blob_containers
+  value       = module.storage_account.resource_blob_containers
 }
 
-output "storage_sftp_users" {
+output "sftp_users" {
   description = "Information about created local SFTP users."
   value       = local.sftp_users_output
   sensitive   = true

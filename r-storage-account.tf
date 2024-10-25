@@ -1,6 +1,6 @@
 module "storage_account" {
   source  = "claranet/storage-account/azurerm"
-  version = "~> 7.14.0"
+  version = "~> 8.0"
 
   location       = var.location
   location_short = var.location_short
@@ -10,12 +10,10 @@ module "storage_account" {
 
   resource_group_name = var.resource_group_name
 
-  use_caf_naming = var.use_caf_naming
-  name_prefix    = var.name_prefix
-  name_suffix    = var.name_suffix
-
-  storage_account_custom_name     = var.custom_storage_account_name
-  custom_diagnostic_settings_name = var.custom_diagnostic_settings_name
+  name_prefix                     = var.name_prefix
+  name_suffix                     = var.name_suffix
+  custom_name                     = var.custom_name
+  diagnostic_settings_custom_name = var.diagnostic_settings_custom_name
 
   access_tier              = var.access_tier
   account_kind             = var.is_premium ? "BlockBlobStorage" : "StorageV2"
@@ -34,8 +32,8 @@ module "storage_account" {
 
   containers = var.containers
 
-  storage_blob_data_protection = var.storage_blob_data_protection
-  storage_blob_cors_rules      = var.storage_blob_cors_rules
+  blob_data_protection = var.blob_data_protection
+  blob_cors_rules      = var.blob_cors_rules
 
   advanced_threat_protection_enabled = var.advanced_threat_protection_enabled
 
