@@ -123,15 +123,15 @@ module "storage_sftp" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 4.0 |
-| local | ~> 2.3 |
-| tls | ~> 4.0 |
+| azurerm | ~> 4.9 |
+| local | >= 2.3 |
+| tls | >= 4.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| storage\_account | claranet/storage-account/azurerm | ~> 8.0 |
+| storage\_account | claranet/storage-account/azurerm | ~> 8.2.0 |
 
 ## Resources
 
