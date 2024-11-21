@@ -1,3 +1,15 @@
+## 8.0.1 (2024-11-21)
+
+### Bug Fixes
+
+* **deps:** upgrade `storage-account` module 7bc710a
+
+### Miscellaneous Chores
+
+* **deps:** update dependency tflint to v0.54.0 110ec22
+* **deps:** update dependency trivy to v0.57.1 686a0f9
+* **deps:** update tools 837693b
+
 ## 8.0.0 (2024-10-25)
 
 ### ⚠ BREAKING CHANGES
