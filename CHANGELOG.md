@@ -1,3 +1,25 @@
+## 8.0.2 (2025-01-31)
+
+### Bug Fixes
+
+* **GH-3:** typo with new v8 storage-account module outputs d1460c2
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.8.6 9345a12
+* **deps:** update dependency opentofu to v1.8.8 e49cca5
+* **deps:** update dependency opentofu to v1.9.0 2c12b96
+* **deps:** update dependency pre-commit to v4.1.0 dd21a10
+* **deps:** update dependency tflint to v0.55.0 8cc15b7
+* **deps:** update dependency trivy to v0.58.1 d5a8c3d
+* **deps:** update dependency trivy to v0.58.2 76b15c2
+* **deps:** update dependency trivy to v0.59.0 d1dfedb
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.19.0 90f939e
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.20.0 9d85020
+* **deps:** update terraform claranet/storage-account/azurerm to ~> 8.3.0 a80b297
+* **deps:** update tools 972e876
+* update tflint config for v0.55.0 2582286
+
 ## 8.0.1 (2024-11-21)
 
 ### Bug Fixes
