@@ -64,7 +64,7 @@ resource "azurerm_storage_account_local_user" "main" {
   lifecycle {
     precondition {
       condition = alltrue([
-        for scope in each.value.permissions_scopes : contains(keys(module.storage_account.storage_blob_containers), scope.target_container)
+        for scope in each.value.permissions_scopes : contains(keys(module.storage_account.resource_blob_containers), scope.target_container)
       ])
       error_message = format("At least one target container does not exist (or is being deleted) for user %s.", each.key)
     }
