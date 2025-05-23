@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 
-* **GH-3:** typo with new v8 storage-account module outputs d1460c2
+* **GH-3:** typo with new v8 `storage-account` module outputs d1460c2
 
 ### Miscellaneous Chores
 
