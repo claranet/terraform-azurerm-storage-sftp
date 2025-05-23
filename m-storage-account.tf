@@ -1,6 +1,6 @@
 module "storage_account" {
   source  = "claranet/storage-account/azurerm"
-  version = "~> 8.5.0"
+  version = "~> 8.6.0"
 
   location       = var.location
   location_short = var.location_short
