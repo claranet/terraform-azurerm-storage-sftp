@@ -49,6 +49,24 @@ variable "min_tls_version" {
   nullable    = false
 }
 
+variable "rbac_storage_contributor_role_principal_ids" {
+  description = "The principal IDs of the users, groups, and service principals to assign the `Storage Account Contributor` role to."
+  type        = list(string)
+  default     = []
+  nullable    = false
+}
+
+variable "rbac_storage_blob_role_principal_ids" {
+  description = "The principal IDs of the users, groups, and service principals to assign the `Storage Blob Data *` different roles to if Blob containers are created."
+  type = object({
+    owners       = optional(list(string), [])
+    contributors = optional(list(string), [])
+    readers      = optional(list(string), [])
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "static_website_config" {
   description = "Static website configuration."
   type = object({

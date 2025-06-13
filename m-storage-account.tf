@@ -25,6 +25,9 @@ module "storage_account" {
   shared_access_key_enabled   = var.shared_access_key_enabled
   min_tls_version             = var.min_tls_version
 
+  rbac_storage_blob_role_principal_ids        = var.rbac_storage_blob_role_principal_ids
+  rbac_storage_contributor_role_principal_ids = var.rbac_storage_contributor_role_principal_ids
+
   static_website_config = var.static_website_config
 
   sftp_enabled  = true
