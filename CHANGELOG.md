@@ -1,3 +1,19 @@
+## 8.2.0 (2025-07-25)
+
+### Features
+
+* **AZ-1565:** add options on storage 19fa1fd
+
+### Miscellaneous Chores
+
+* **⚙️:** ✏️ update template identifier for MR review 2d4ad5e
+* 🗑️ remove old commitlint configuration files 6c06536
+* **deps:** update dependency opentofu to v1.10.0 559ccdb
+* **deps:** update dependency opentofu to v1.10.1 7b7db5c
+* **deps:** update dependency opentofu to v1.10.3 26f936b
+* **deps:** update dependency tflint to v0.58.1 cb0cb13
+* **deps:** update tools ae4cfe8
+
 ## 8.1.0 (2025-06-13)
 
 ### Features
