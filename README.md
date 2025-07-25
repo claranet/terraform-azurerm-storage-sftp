@@ -150,6 +150,7 @@ module "storage_sftp" {
 | account\_replication\_type | Defines the type of replication to use for this Storage Account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. | `string` | `"ZRS"` | no |
 | advanced\_threat\_protection\_enabled | Boolean flag which controls if advanced threat protection is enabled, see [documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-advanced-threat-protection?tabs=azure-portal) for more information. | `bool` | `false` | no |
 | allowed\_cidrs | List of CIDR to allow access to that Storage Account. | `list(string)` | `[]` | no |
+| allowed\_copy\_scope | Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are `AAD` or `PrivateLink`. | `string` | `null` | no |
 | blob\_cors\_rules | Storage Account blob CORS rules. Please refer to the [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#cors_rule) for more information. | <pre>list(object({<br/>    allowed_headers    = list(string)<br/>    allowed_methods    = list(string)<br/>    allowed_origins    = list(string)<br/>    exposed_headers    = list(string)<br/>    max_age_in_seconds = number<br/>  }))</pre> | `[]` | no |
 | blob\_data\_protection | Blob Storage data protection parameters. | <pre>object({<br/>    delete_retention_policy_in_days           = optional(number, 0)<br/>    container_delete_retention_policy_in_days = optional(number, 0)<br/>  })</pre> | <pre>{<br/>  "container_delete_retention_policy_in_days": 30,<br/>  "delete_retention_policy_in_days": 30<br/>}</pre> | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
@@ -164,6 +165,7 @@ module "storage_sftp" {
 | https\_traffic\_only\_enabled | Boolean flag which forces HTTPS if enabled. | `bool` | `true` | no |
 | identity\_ids | Specifies a list of User Assigned Managed Identity IDs to be assigned to this Storage Account. | `list(string)` | `null` | no |
 | identity\_type | Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are `SystemAssigned`, `UserAssigned`, `SystemAssigned, UserAssigned` (to enable both). | `string` | `"SystemAssigned"` | no |
+| infrastructure\_encryption\_enabled | Whether Infrastructure Encryption is enabled, see [documentation](https://learn.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal) for more information. | `bool` | `false` | no |
 | is\_premium | `true` to enable `Premium` tier for this Storage Account. | `bool` | `true` | no |
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |

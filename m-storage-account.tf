@@ -37,8 +37,10 @@ module "storage_account" {
 
   blob_data_protection = var.blob_data_protection
   blob_cors_rules      = var.blob_cors_rules
+  allowed_copy_scope   = var.allowed_copy_scope
 
   advanced_threat_protection_enabled = var.advanced_threat_protection_enabled
+  infrastructure_encryption_enabled  = var.infrastructure_encryption_enabled
 
   network_rules_enabled   = var.network_rules_enabled
   default_firewall_action = var.default_firewall_action

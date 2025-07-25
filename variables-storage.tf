@@ -119,10 +119,29 @@ variable "blob_cors_rules" {
   nullable = false
 }
 
+variable "allowed_copy_scope" {
+  description = "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are `AAD` or `PrivateLink`."
+  type        = string
+  default     = null
+  validation {
+    condition     = var.allowed_copy_scope == null || try(contains(["AAD", "PrivateLink"], var.allowed_copy_scope), false)
+    error_message = "Allowed values for allowed_copy_scope are `AAD` or `PrivateLink`."
+  }
+}
+
 # Threat protection
 
 variable "advanced_threat_protection_enabled" {
   description = "Boolean flag which controls if advanced threat protection is enabled, see [documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-advanced-threat-protection?tabs=azure-portal) for more information."
+  type        = bool
+  default     = false
+  nullable    = false
+}
+
+# Infrastructure encryption
+
+variable "infrastructure_encryption_enabled" {
+  description = "Whether Infrastructure Encryption is enabled, see [documentation](https://learn.microsoft.com/en-us/azure/storage/common/infrastructure-encryption-enable?tabs=portal) for more information."
   type        = bool
   default     = false
   nullable    = false
