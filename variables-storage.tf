@@ -193,6 +193,13 @@ variable "private_link_access" {
   nullable = false
 }
 
+variable "public_network_access_enabled" {
+  description = "Whether the public network access is enabled."
+  type        = bool
+  default     = true
+  nullable    = false
+}
+
 # Identity
 
 variable "identity_type" {

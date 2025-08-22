@@ -180,6 +180,7 @@ module "storage_sftp" {
 | nfsv3\_enabled | Is NFSv3 protocol enabled? Changing this forces a new resource to be created. | `bool` | `false` | no |
 | private\_link\_access | List of Privatelink objects to allow access from. | <pre>list(object({<br/>    endpoint_resource_id = string<br/>    endpoint_tenant_id   = optional(string, null)<br/>  }))</pre> | `[]` | no |
 | public\_nested\_items\_allowed | Allow or disallow nested items within this Storage Account to opt into being public. | `bool` | `false` | no |
+| public\_network\_access\_enabled | Whether the public network access is enabled. | `bool` | `true` | no |
 | rbac\_storage\_blob\_role\_principal\_ids | The principal IDs of the users, groups, and service principals to assign the `Storage Blob Data *` different roles to if Blob containers are created. | <pre>object({<br/>    owners       = optional(list(string), [])<br/>    contributors = optional(list(string), [])<br/>    readers      = optional(list(string), [])<br/>  })</pre> | `{}` | no |
 | rbac\_storage\_contributor\_role\_principal\_ids | The principal IDs of the users, groups, and service principals to assign the `Storage Account Contributor` role to. | `list(string)` | `[]` | no |
 | resource\_group\_name | Resource group name. | `string` | n/a | yes |

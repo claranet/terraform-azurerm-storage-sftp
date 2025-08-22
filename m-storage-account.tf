@@ -49,6 +49,8 @@ module "storage_account" {
   network_bypass          = var.network_bypass
   private_link_access     = var.private_link_access
 
+  public_network_access_enabled = var.public_network_access_enabled
+
   identity_type = var.identity_type
   identity_ids  = var.identity_ids
 
