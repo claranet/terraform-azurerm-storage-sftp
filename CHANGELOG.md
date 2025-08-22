@@ -1,3 +1,15 @@
+## 8.3.0 (2025-08-22)
+
+### Features
+
+* ✨ add `public_network_access_enabled` parameter 8acaab4
+
+### Miscellaneous Chores
+
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v6 91989a4
+* **deps:** update tools e1145d8
+* **deps:** update tools f8a66bc
+
 ## 8.2.0 (2025-07-25)
 
 ### Features
