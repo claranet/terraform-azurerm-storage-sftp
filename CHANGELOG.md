@@ -1,3 +1,14 @@
+## 8.3.1 (2025-09-01)
+
+### Bug Fixes
+
+* **deps:** 🐛 bump module dependencies 🔗 884fbc5
+
+### Miscellaneous Chores
+
+* **deps:** update dependency tflint to v0.59.1 a3248e1
+* merge remote-tracking branch 'origin/renovate/tools' e4644ba
+
 ## 8.3.0 (2025-08-22)
 
 ### Features
