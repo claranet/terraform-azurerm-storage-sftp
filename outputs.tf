@@ -1,6 +1,7 @@
 output "resource" {
   description = "Storage Account resource object."
   value       = module.storage_account
+  sensitive   = true
 }
 
 output "id" {
